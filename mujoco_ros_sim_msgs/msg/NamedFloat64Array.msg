@@ -1,0 +1,2 @@
+string name
+std_msgs/Float64MultiArray value

@@ -1,0 +1,27 @@
+<launch>
+    <arg name="pub_rate" default="200.0"/>
+    <arg name="amp" default="0.2"/>
+    <arg name="freq" default="0.5"/>
+  
+    <node pkg="fr3_controller"
+          type="fr3_controller_node.py"
+          name="fr3_controller"
+          output="screen">
+      <param name="pub_rate" value="$(arg pub_rate)"/>
+      <param name="amp" value="$(arg amp)"/>
+      <param name="freq" value="$(arg freq)"/>
+    </node>
+
+    <arg name="mjcf" default="$(find mujoco_ros_sim)/franka_fr3/position_scene.xml"/>
+    <arg name="camera_fps" default="60.0"/>
+  
+    <node pkg="mujoco_ros_sim"
+          type="mujoco_sim_node.py"
+          name="mujoco_sim_node"
+          output="screen">
+  
+      <param name="robot_name" value="$(arg mjcf)"/>
+      <param name="camera_fps" value="$(arg camera_fps)"/>
+    </node>
+  </launch>
+  
